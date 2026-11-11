@@ -5,7 +5,7 @@ Each fixed file contains its own test cases (Python `assert`, JavaScript checks 
 **How the tests were run**:
 - Python: `python3 bugN_fixed.py` (Python 3.11)
 - JavaScript: `gjs bugN_fixed.js` (SpiderMonkey JavaScript engine; Node.js was not installed)
-- C: `gcc -Wall -Werror -Wextra -pedantic bug5_fixed.c -lm -o bug5_fixed && ./bug5_fixed`
+- C: `gcc -Wall -Werror -Wextra -pedantic bug5_fixed.c -o bug5_fixed && ./bug5_fixed`
 
 | File | Runs without errors | Test cases passed |
 |---|---|---|
@@ -92,7 +92,7 @@ Each fixed file contains its own test cases (Python `assert`, JavaScript checks 
 
 ## Bug 5 – bug5_fixed.c
 **Fix applied**: Cast to `double` before dividing: `return ((double)passed / total * 100);`  
-**Manual tweaks beyond AI suggestion**: `main()` was turned into a small test runner (a `check()` helper using `fabs` for floating-point comparison, linked with `-lm`). It returns `1` if any case fails. Compiles with no warnings under `-Wall -Werror -Wextra -pedantic`.
+**Manual tweaks beyond AI suggestion**: `main()` was turned into a small test loop over 5 input/expected pairs that returns `1` if any case fails. Compiles with no warnings under `-Wall -Werror -Wextra -pedantic`.
 - **Input**: passed=29, total=40  
 - **Expected Output**: 72.5%  
 - **Actual Output**: 72.5% ✅
