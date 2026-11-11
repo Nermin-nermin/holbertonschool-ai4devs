@@ -1,37 +1,31 @@
 # Bug Descriptions
 
 ## Bug 1 – bug1.py
-**Language**: Python  
-**Intended Behavior**: Return the last `n` items of a list, in their original order.  
-**Issue Type**: Off-by-one error (loop logic).  
-**Notes**: The loop's start index is `len(items) - n + 1` instead of `len(items) - n`, so the function always returns one item too few. `last_n([10, 20, 30, 40, 50], 2)` returns `[50]` instead of `[40, 50]`, and it fails when `n == len(items)`.
+**Intended Behavior**: Return a new list containing the last `n` items of a list, in their original order. For `[10, 20, 30, 40, 50]` and `n = 2`, it should return `[40, 50]`; for `n = 5`, it should return the whole list.  
+**Issue Type**: Off-by-one error.  
+**Notes**: The returned list is always one item shorter than requested.
 
 ## Bug 2 – bug2.js
-**Language**: JavaScript  
-**Intended Behavior**: Return `true` if a year is a leap year: divisible by 4, except years divisible by 100 unless they are also divisible by 400.  
+**Intended Behavior**: Return `true` if a year is a leap year and `false` otherwise. A leap year is divisible by 4, except years divisible by 100, unless they are also divisible by 400. For example, 2024 and 2000 are leap years; 2023 and 1900 are not.  
 **Issue Type**: Logical error.  
-**Notes**: The 400 rule is inverted (`year % 400 !== 0` instead of `=== 0`). Ordinary years like 2024 work, but century years are wrong: 1900 returns `true` and 2000 returns `false`. No error is thrown; the built-in tests print `FAIL`.
+**Notes**: Century years (1900, 2000) give the wrong result.
 
 ## Bug 3 – bug3.py
-**Language**: Python  
-**Intended Behavior**: Print each customer's number of orders and their average order value.  
+**Intended Behavior**: Print one line per customer showing their number of orders and their average order value, for every customer in the dictionary, including customers with no orders.  
 **Issue Type**: Runtime exception.  
-**Notes**: `average()` divides by `len(values)` without checking for an empty list. The program prints alice and bob, then crashes with `ZeroDivisionError` on `carol`, who has no orders, so dave is never reported.
+**Notes**: The program crashes partway through the report.
 
 ## Bug 4 – bug4.js
-**Language**: JavaScript  
-**Intended Behavior**: Print an itemized receipt for a shopping cart (name, quantity, line total) followed by the cart total.  
+**Intended Behavior**: Print an itemized receipt for a shopping cart, with one line per item (name, quantity, line total), then a separator line and the total price of the cart.  
 **Issue Type**: Syntax error.  
-**Notes**: The `for...of` header is missing its closing parenthesis: `for (const item of items {`. Node.js refuses to run the file at all and reports `SyntaxError: missing ) after for-of iterable` (wording varies by version).
+**Notes**: The file does not run at all.
 
 ## Bug 5 – bug5.c
-**Language**: C  
-**Intended Behavior**: Return the percentage of students who passed as a `double` (e.g. 29 of 40 → `72.5`).  
+**Intended Behavior**: Return the percentage of students who passed as a decimal number. For example, 29 passed out of 40 should return `72.5`, and 18 out of 24 should return `75.0`.  
 **Issue Type**: Misuse of data types.  
-**Notes**: `passed / total` is integer division, so the fraction is truncated to `0` (or `1` when everyone passed) *before* multiplying by 100 and converting to `double`. It compiles without warnings, but prints `0.0%`, `0.0%`, `100.0%` instead of `72.5%`, `75.0%`, `100.0%`.
+**Notes**: Most classes are reported as `0.0%`.
 
 ## Bug 6 – bug6.py
-**Language**: Python  
-**Intended Behavior**: Return the 3 highest scores in descending order without modifying the original list.  
-**Issue Type**: Misuse of a library/built-in API.  
-**Notes**: `list.sort()` sorts in place and returns `None`, so `ranked[:3]` raises `TypeError: 'NoneType' object is not subscriptable`. It also violates the "do not modify the original" requirement; `sorted(scores, reverse=True)` is the intended API.
+**Intended Behavior**: Return the 3 highest scores in descending order, without modifying the original leaderboard list. For `[420, 1337, 88, 999, 512, 64]`, it should return `[1337, 999, 512]`.  
+**Issue Type**: Misuse of a library/built-in function.  
+**Notes**: The function raises an error instead of returning the scores.
