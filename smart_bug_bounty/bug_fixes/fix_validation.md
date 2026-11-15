@@ -1,12 +1,12 @@
 # Fix Validation
 
-Fixed files are in this folder (`bug1_fixed.py`, `bug2_fixed.js`, `Bug3Fixed.java`, `bug4_fixed.py`, `bug5_fixed.js`). Tests are in `tests/`. Every test below was run on Node 22, Python 3 and OpenJDK, and the outputs were copied from the real runs.
+Fixed files are in this folder (`bug1_fixed.py`, `bug2_fixed.js`, `bug3_fixed.java`, `bug4_fixed.py`, `bug5_fixed.js`). Tests are in `tests/`. Every test below was run on Node 22, Python 3 and OpenJDK, and the outputs were copied from the real runs.
 
 **How to run**
 ```bash
 python3 tests/test_python_fixes.py                 # bug1, bug4
 node --test tests/test_js_fixes.js                 # bug2, bug5
-javac -d out Bug3Fixed.java tests/Bug3FixedTest.java && java -cp out Bug3FixedTest   # Bug3
+javac -d out bug3_fixed.java tests/Bug3FixedTest.java && java -cp out Bug3FixedTest   # Bug3
 ```
 
 **Overall: 18 / 18 tests passed** (Python 7, JavaScript 5, Java 6).
@@ -30,7 +30,7 @@ javac -d out Bug3Fixed.java tests/Bug3FixedTest.java && java -cp out Bug3FixedTe
   - Empty list → `"Sent 0 emails"` ✅
 - **Before → After**: `Sent 0 emails` → `Sent 3 emails`
 
-## Bug3.java
+## bug3.java
 - **Original Issue**: `role == "admin"` compared references (typed "admin" was denied); `i <= roles.length` threw `ArrayIndexOutOfBoundsException`.
 - **Fix Applied**: `"admin".equals(role)` and `i < roles.length`. AI fix applied as suggested.
 - **Test Results**: **6/6 passed** (plain-Java test runner, no JUnit needed)
@@ -69,7 +69,7 @@ javac -d out Bug3Fixed.java tests/Bug3FixedTest.java && java -cp out Bug3FixedTe
 |---|---|---|---|---|
 | bug1.py | AI suggestion | None | 3 | ✅ Pass |
 | bug2.js | AI suggestion | Guarded demo code | 2 | ✅ Pass |
-| Bug3.java | AI suggestion | None | 6 | ✅ Pass |
+| bug3.java | AI suggestion | None | 6 | ✅ Pass |
 | bug4.py | AI suggestion + design choice | Return list of shares | 4 | ✅ Pass |
 | bug5.js | AI suggestion | Explicit invalid-id handling | 3 | ✅ Pass |
 
