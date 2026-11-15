@@ -1,0 +1,6 @@
+{
+  "name": "ai-code-review-simulator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "test": "node --test test/search.test.js" }
+}
