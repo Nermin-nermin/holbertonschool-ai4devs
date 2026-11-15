@@ -52,7 +52,7 @@ Putting the literal first (`"admin".equals(role)`) also avoids a `NullPointerExc
 
 ## bug5.js
 **AI Explanation**:
-1. **XSS:** user-controlled `title` is concatenated straight into HTML. When the string is inserted with `innerHTML`, the browser parses `<img src=x onerror=...>` as a real element and runs the JavaScript in `onerror`, which can steal cookies or act as the user. This is a stored XSS (OWASP A03: Injection).
+1. **XSS:** user-controlled `title` is concatenated straight into HTML. Inserted with `innerHTML`, any markup in the title becomes live HTML. The demo title only contains a bold tag, but an attacker could use an image tag with an onerror handler (or similar) to run JavaScript that steals cookies or acts as the user. This is stored XSS (OWASP A03: Injection).
 2. **Type mismatch:** `URLSearchParams.get('id')` always returns a string, while job ids are numbers. Strict equality `'2' === 2` is `false`, so `find` never matches.
 3. `var i` is function-scoped; prefer `const`/`let` or `map`.
 **Suggested Fix**: escape `& < > " '` before inserting text into HTML (or use `textContent` / a templating library that escapes by default), and convert the id with `Number.parseInt(id, 10)` and validate it before comparing. Don't "fix" the comparison by switching to loose `==`, because that hides other type bugs.

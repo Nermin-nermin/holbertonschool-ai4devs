@@ -3,7 +3,7 @@
 
 const jobs = [
   { id: 1, title: 'Junior AI Engineer' },
-  { id: 2, title: '<img src=x onerror="alert(document.cookie)">' },
+  { id: 2, title: '<b style="color:red">URGENT</b> Hiring now' },
   { id: 3, title: 'Data Analyst' },
 ];
 

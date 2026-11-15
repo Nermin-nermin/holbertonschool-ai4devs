@@ -28,6 +28,6 @@ Five buggy snippets in 3 languages (Python, JavaScript, Java), 10–40 lines eac
 
 ## bug5.js
 - **Intended Behavior**: render job titles as plain text in `<li>` items, and `?id=2` finds the job with id 2.
-- **Current Issue**: (1) titles are concatenated into HTML without escaping, so `<img onerror=...>` runs JavaScript (stored XSS); (2) `URLSearchParams.get()` returns the string `"2"`, which never `===` the number `2`.
-- **Observed**: raw `<img src=x onerror=...>` in the output, and `undefined` for the lookup.
+- **Current Issue**: (1) titles are concatenated into HTML without escaping, so a title containing HTML is rendered as live markup; an attacker could use an image tag with an onerror handler to run JavaScript (stored XSS). The demo uses a harmless bold tag instead of a script; (2) `URLSearchParams.get()` returns the string `"2"`, which never `===` the number `2`.
+- **Observed**: the title's bold tag appears unescaped in the HTML output, and `undefined` for the lookup.
 - **Category / Severity**: security (XSS) + type mismatch - Critical
