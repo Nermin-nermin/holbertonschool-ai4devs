@@ -31,7 +31,7 @@ const sent = results.filter((r) => r.status === 'fulfilled').length;
 `Promise.allSettled` (rather than `Promise.all`) means one failed email doesn't hide how many succeeded. If emails must be sent one at a time (rate limits), use a `for...of` loop with `await` instead.
 **Confidence**: High
 
-## Bug3.java
+## bug3.java
 **AI Explanation**: Two independent bugs.
 1. In Java, `==` on objects compares **references** (same object in memory), not content. String literals are interned, so `"admin" == "admin"` happens to be true, but a string read from `Scanner` or built with `new String("admin")` is a different object, so the check fails and real admins are denied.
 2. Valid indexes are `0 .. length-1`. The condition `i <= roles.length` runs one extra iteration with `i == 3` → `ArrayIndexOutOfBoundsException`.
@@ -66,6 +66,6 @@ Putting the literal first (`"admin".equals(role)`) also avoids a `NullPointerExc
 |---|---|---|---|---|
 | bug1.py | Shared mutable state | Yes | Yes | High |
 | bug2.js | Async control flow | Yes | Yes | High |
-| Bug3.java | Reference equality + off-by-one | Yes (both bugs) | Yes | High |
+| bug3.java | Reference equality + off-by-one | Yes (both bugs) | Yes | High |
 | bug4.py | Float precision + zero division | Yes | Yes, after choosing the cent-distribution rule | Medium |
 | bug5.js | XSS + type coercion | Yes (both, plus a style note) | Yes | High |
