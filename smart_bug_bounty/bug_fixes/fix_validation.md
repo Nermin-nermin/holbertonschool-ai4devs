@@ -56,10 +56,10 @@ javac -d out bug3_fixed.java tests/Bug3FixedTest.java && java -cp out Bug3FixedT
 - **Original Issue**: Unescaped titles allowed stored XSS; string id `"2"` never matched numeric id `2`.
 - **Fix Applied**: `escapeHtml()` for `& < > " '` and template rendering via `map`; `Number.parseInt(id, 10)` with an integer check before comparing. **Manual adjustment:** invalid ids (`"abc"`) return `undefined` explicitly instead of relying on `NaN` comparisons.
 - **Test Results**: **3/3 passed** (5 assertions)
-  - Malicious title is rendered as `&lt;img ... &gt;` and the output contains no `<img` tag ✅
+  - The title's markup is rendered as escaped text and the output contains no live bold tag ✅
   - `findJob(jobs, "2")` returns the job with id 2 ✅
   - `"abc"` and `"99"` return `undefined` ✅
-- **Before → After**: live `<img onerror=...>` + `undefined` → escaped text + `{ id: 2, ... }`
+- **Before → After**: unescaped title markup + `undefined` → escaped text + `{ id: 2, ... }`
 
 ---
 
